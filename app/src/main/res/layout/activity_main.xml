@@ -8,5 +8,10 @@
     android:orientation="vertical"
     tools:context="com.pediy.kanxue.MainActivity">
 
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="跳转"/>
 
 </LinearLayout>
