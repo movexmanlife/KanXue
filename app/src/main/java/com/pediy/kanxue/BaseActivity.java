@@ -59,9 +59,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.finish();
     }
 
-    public void initToolBar(Toolbar mToolBar) {
-        if (null != mToolBar) {
-            setSupportActionBar(mToolBar);
+    public void initToolBar(Toolbar toolBar) {
+        if (null != toolBar) {
+            setSupportActionBar(toolBar);
             getSupportActionBar().setDisplayShowHomeEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

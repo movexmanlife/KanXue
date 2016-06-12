@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/category_read">
+        <com.pediy.kanxue.widget.WrapperListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/settings_thread_sort"
+            android:entries="@array/sortType"
+            android:entryValues="@array/prefValues"
+            android:key="@string/preference_key_read"
+            android:title="@string/settings_thread_sort" />
+
+
+        <com.pediy.kanxue.widget.WrapperListPreference
+            android:defaultValue="4"
+            android:dialogTitle="@string/settings_text_size"
+            android:entries="@array/fontSize"
+            android:entryValues="@array/prefValues"
+            android:key="pTextSize"
+            android:title="@string/settings_text_size" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pLoadPic"
+            android:summary="@string/settings_load_pic_summary"
+            android:title="@string/settings_load_pic" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

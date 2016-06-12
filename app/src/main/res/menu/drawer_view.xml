@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_new_topic"
+            android:title="@string/navigation_new_topic" />
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/navigation_home" />
+
+        <item
+            android:id="@+id/nav_safe_news"
+            android:title="@string/navigation_safe_news" />
+
+    </group>
+
+    <item android:title="其他">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:title="@string/navigation_setting" />
+            <item
+                android:id="@+id/nav_feedback"
+                android:title="@string/navigation_feedback" />
+            <item
+                android:id="@+id/nav_about"
+                android:title="@string/navigation_about" />
+        </menu>
+    </item>
+
+</menu>

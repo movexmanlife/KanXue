@@ -30,9 +30,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     LoginPresenter mLoginPresenter;
     private MaterialDialog mDialog;
 
-    public static void startActivity(Context mContext) {
-        Intent intent = new Intent(mContext, LoginActivity.class);
-        mContext.startActivity(intent);
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
     }
 
     @Override
