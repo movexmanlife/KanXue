@@ -9,12 +9,14 @@ import com.pediy.kanxue.injector.module.AppModule;
 public class App extends Application {
 
     private AppComponent mAppComponent;
+    private static App mApp;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
         initComponent();
+        mApp = this;
     }
 
     private void initComponent() {
@@ -25,5 +27,9 @@ public class App extends Application {
 
     public AppComponent getAppComponent() {
         return mAppComponent;
+    }
+
+    public static App getInstance() {
+        return mApp;
     }
 }

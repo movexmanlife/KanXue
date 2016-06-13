@@ -36,7 +36,7 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
 
         mPreferenceThreadSort = (ListPreference) findPreference(getString(R.string.preference_key_read));
         mPreferenceThreadSort.setOnPreferenceChangeListener(this);
-        setListSetting(Integer.parseInt(prefs.getString(getString(R.string.preference_key_font_size), "0")), R.array.sortType,
+        setListSetting(Integer.parseInt(prefs.getString(getString(R.string.preference_key_read), "0")), R.array.sortType,
                 mPreferenceThreadSort);
     }
 

@@ -16,12 +16,12 @@
             android:dialogTitle="@string/settings_text_size"
             android:entries="@array/fontSize"
             android:entryValues="@array/prefValues"
-            android:key="pTextSize"
+            android:key="@string/preference_key_font_size"
             android:title="@string/settings_text_size" />
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="pLoadPic"
+            android:key="@string/preference_key_load_img"
             android:summary="@string/settings_load_pic_summary"
             android:title="@string/settings_load_pic" />
 

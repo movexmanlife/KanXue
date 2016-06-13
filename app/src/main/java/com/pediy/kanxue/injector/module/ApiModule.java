@@ -1,5 +1,6 @@
 package com.pediy.kanxue.injector.module;
 
+import com.pediy.kanxue.api.feedback.FeedbackApi;
 import com.pediy.kanxue.api.login.LoginApi;
 
 import javax.inject.Named;
@@ -15,5 +16,11 @@ public class ApiModule {
     @Singleton
     public LoginApi provideLoginApi(@Named("api") OkHttpClient okHttpClient) {
         return new LoginApi(okHttpClient);
+    }
+
+    @Provides
+    @Singleton
+    public FeedbackApi provideFeedbackApi(@Named("api") OkHttpClient okHttpClient) {
+        return new FeedbackApi(okHttpClient);
     }
 }

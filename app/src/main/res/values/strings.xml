@@ -15,9 +15,23 @@
 
     <string name="preference_key_read">阅读时间排序</string>
     <string name="preference_key_font_size">字体大小</string>
+    <string name="preference_key_load_img">图片加载</string>
+
     <string name="category_read">阅读</string>
     <string name="settings_thread_sort">帖子排序方式</string>
     <string name="settings_text_size">字体大小</string>
     <string name="settings_load_pic_summary">默认加载图片</string>
     <string name="settings_load_pic">是否加载图片</string>
+    <string name="version">v1.0</string>
+    <string name="version_format">v%1$s</string>
+    <string name="kanxue">看雪安全论坛（Android）</string>
+    <string name="author">开发者：</string>
+    <string name="project">项目地址：</string>
+    <string name="author_name">robotlife</string>
+    <string name="about_kanxue">关于看雪</string>
+    <string name="bbs_address">看雪论坛网址</string>
+    <string name="kanxue_info"> 看雪学院创建于2000年，历经10多年的发展，受到业内的广泛认同，在行业中树立了令人尊敬的专业形象。网站始终关注安全技术领域的最新发展，为IT专业人士、技术专家提供了一个氛围良好的交流与合作空间。 多年来，看雪网站培养了大批安全人才，使他们从普通IT爱好者成长为具有一技之长的安全专才。 10多年的发展过程中，看雪网站形成了大量有价值的技术资料，经过看雪团队的共同努力，先后出版过数本技术专著，深受出版社和广大读者好评，社会影响深远。</string>
+    <string name="introduce">看雪论坛：</string>
+    <string name="kanxue_url">http://bbs.pediy.com</string>
+    <string name="github">https://github.com/robotlife/KanXue</string>
 </resources>

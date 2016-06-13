@@ -7,4 +7,9 @@
 
     <color name="title_header_color">#40567E</color>
     <color name="title_header_color_dark">#25334B</color>
+    <color name="content_backgroud">#f2f2f2</color>
+    <color name="lightgrey">#d3d3d3</color>
+
+    <color name="txt_gray">#999999</color>
+    <color name="txt_dark_gray">#434343</color>
 </resources>

@@ -16,12 +16,16 @@ import android.widget.ImageView;
 import com.pediy.kanxue.BaseActivity;
 import com.pediy.kanxue.R;
 import com.pediy.kanxue.injector.component.DaggerActivityComponent;
+import com.pediy.kanxue.injector.module.ActivityModule;
+import com.pediy.kanxue.ui.about.AboutActivity;
+import com.pediy.kanxue.ui.feedback.FeedbackActivity;
+import com.pediy.kanxue.ui.setting.SettingActivity;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainContract.View{
 
     @BindView(R.id.drawerLayout)
     DrawerLayout mDrawerLayout;
@@ -50,6 +54,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
         initToolbar();
+        mPresenter.attachView(this);
     }
 
     private void initToolbar() {
@@ -72,7 +77,8 @@ public class MainActivity extends BaseActivity {
     public void setListener() {
         mNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
                         mPresenter.onNavigationClick(menuItem);
                         return true;
                     }
@@ -84,6 +90,28 @@ public class MainActivity extends BaseActivity {
      */
     @Override
     public void initInjector() {
+        DaggerMainComponent.builder().appComponent(getAppComponent()).
+                activityModule(new ActivityModule(this)).build().inject(this);
     }
 
+    @Override
+    public void startAboutActivity() {
+        AboutActivity.startActivity(this);
+    }
+
+    @Override
+    public void startFeedbackActivity() {
+        FeedbackActivity.startActivity(this);
+    }
+
+    @Override
+    public void startSettingActivity() {
+        SettingActivity.startActivity(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
+    }
 }

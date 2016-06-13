@@ -1,11 +1,12 @@
-package com.pediy.kanxue.ui.login;
+package com.pediy.kanxue.ui.feedback;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.pediy.kanxue.BaseActivity;
@@ -17,45 +18,51 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends BaseActivity implements LoginContract.View {
-
-    @BindView(R.id.et_username)
-    AppCompatEditText mUsernameEt;
-    @BindView(R.id.et_passwd)
-    AppCompatEditText mPasswdEt;
-    @BindView(R.id.btn_login)
-    Button mLoginBtn;
+public class FeedbackActivity extends BaseActivity implements FeedbackContract.View {
 
     @Inject
-    LoginPresenter mLoginPresenter;
+    FeedbackPresenter mFeedbackPresenter;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.et_content)
+    EditText mContentEt;
+    @BindView(R.id.btn_commit)
+    Button mCommitBtn;
+
     private MaterialDialog mDialog;
 
     public static void startActivity(Context context) {
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, FeedbackActivity.class);
         context.startActivity(intent);
     }
 
     @Override
     public int getContentViewId() {
-        return R.layout.activity_login;
+        return R.layout.activity_feedback;
     }
 
     @Override
     public void initData() {
-        mDialog = new MaterialDialog.Builder(this).title("提示").content("登录中").progress(true, 0).build();
+        mDialog = new MaterialDialog.Builder(this).title("提示").content("提交中").progress(true, 0).build();
     }
 
     @Override
     public void initView() {
-        mLoginPresenter.attachView(this);
+        mFeedbackPresenter.attachView(this);
+        initToolbar();
+    }
+
+    private void initToolbar() {
+        initToolBar(mToolbar);
+        setTitle("反馈");
     }
 
     @Override
     public void setListener() {
-        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+        mCommitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                commit();
             }
         });
     }
@@ -65,7 +72,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
      */
     @Override
     public void initInjector() {
-        DaggerLoginComponent.builder().
+        DaggerFeedbackComponent.builder().
                 appComponent(getAppComponent()).
                 activityModule(new ActivityModule(this))
                 .build().inject(this);
@@ -86,18 +93,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void showUserNameError(String error) {
+    public void showContentError(String error) {
 
     }
 
     @Override
-    public void showPassWordError(String error) {
-
-    }
-
-    @Override
-    public void loginSuccess() {
-        mLoginBtn.postDelayed(new Runnable() {
+    public void commitSuccess() {
+        mCommitBtn.postDelayed(new Runnable() {
             @Override
             public void run() {
                 finish();
@@ -105,15 +107,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         }, 1500);
     }
 
-    private void login() {
-        String name = mUsernameEt.getText().toString();
-        String passwd = mPasswdEt.getText().toString();
-        mLoginPresenter.login(name, passwd);
+    private void commit() {
+        String content = mContentEt.getText().toString();
+        mFeedbackPresenter.commit("", "",content);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mLoginPresenter.detachView();
+        mFeedbackPresenter.detachView();
     }
 }
