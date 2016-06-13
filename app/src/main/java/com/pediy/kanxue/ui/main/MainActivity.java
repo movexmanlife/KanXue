@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -107,6 +108,16 @@ public class MainActivity extends BaseActivity implements MainContract.View{
     @Override
     public void startSettingActivity() {
         SettingActivity.startActivity(this);
+    }
+
+    @Override
+    public void closeDrawers() {
+        mDrawerLayout.closeDrawers();
+    }
+
+    @Override
+    public void showFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.contentView, fragment).commit();
     }
 
     @Override

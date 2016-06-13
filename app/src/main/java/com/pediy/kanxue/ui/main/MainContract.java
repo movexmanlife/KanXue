@@ -1,5 +1,8 @@
 package com.pediy.kanxue.ui.main;
 
+
+import android.support.v4.app.Fragment;
+
 import com.pediy.kanxue.BasePresenter;
 import com.pediy.kanxue.BaseView;
 
@@ -8,6 +11,10 @@ public interface MainContract {
         void startAboutActivity();
         void startFeedbackActivity();
         void startSettingActivity();
+
+        void closeDrawers();
+        void setTitle(CharSequence title);
+        void showFragment(Fragment fragment);
     }
 
     interface Presenter extends BasePresenter<View> {

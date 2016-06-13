@@ -23,11 +23,11 @@
 
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:background="@drawable/kanxue" />
+            android:background="@drawable/kanxue_splash" />
 
         <TextView
             android:id="@+id/tv_about"
@@ -37,6 +37,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="@string/about_kanxue"
+            android:textSize="18sp"
             android:textColor="@color/txt_dark_gray" />
 
         <LinearLayout

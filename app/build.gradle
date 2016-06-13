@@ -43,6 +43,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.5'
     compile 'org.greenrobot:eventbus:3.0.0'
 
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'com.afollestad.material-dialogs:core:0.8.5.9'
     compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar'
 }

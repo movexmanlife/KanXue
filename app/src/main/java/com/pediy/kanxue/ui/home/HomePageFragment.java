@@ -5,6 +5,11 @@ import com.pediy.kanxue.R;
 
 
 public class HomePageFragment extends BaseFragment {
+    public static HomePageFragment newInstance() {
+        HomePageFragment fragment = new HomePageFragment();
+        return fragment;
+    }
+
     @Override
     public int getContentViewId() {
         return R.layout.fragment_home_page;
@@ -32,4 +37,5 @@ public class HomePageFragment extends BaseFragment {
     public void initInjector() {
 
     }
+
 }

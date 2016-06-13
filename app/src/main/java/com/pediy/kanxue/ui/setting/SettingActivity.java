@@ -33,7 +33,7 @@ public class SettingActivity extends BaseActivity{
     public void initView() {
         initToolBar(mToolbar);
         setTitle(R.string.setting);
-        getFragmentManager().beginTransaction().replace(R.id.content, new SettingFragment()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.content, SettingFragment.newInstance()).commit();
     }
 
     @Override

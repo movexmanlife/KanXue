@@ -19,7 +19,7 @@ import butterknife.BindView;
 public class TempleteActivity extends BaseActivity implements TempleteContract.View {
 
     @Inject
-    TempletePresenter mTempletePresenter;
+    TempletePresenter mPresenter;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, TempleteActivity.class);
@@ -37,7 +37,7 @@ public class TempleteActivity extends BaseActivity implements TempleteContract.V
 
     @Override
     public void initView() {
-        mTempletePresenter.attachView(this);
+        mPresenter.attachView(this);
     }
 
     @Override

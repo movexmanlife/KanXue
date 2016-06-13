@@ -2,12 +2,14 @@ package com.pediy.kanxue.ui.main;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
 import com.pediy.kanxue.R;
 import com.pediy.kanxue.api.login.LoginApi;
 import com.pediy.kanxue.bean.LoginBean;
 import com.pediy.kanxue.ui.about.AboutActivity;
+import com.pediy.kanxue.ui.home.HomePageFragment;
 
 import javax.inject.Inject;
 
@@ -48,11 +50,17 @@ public class MainPresenter implements MainContract.Presenter{
 
     public void onNavigationClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.nav_new_topic:
+                break;
+            case R.id.nav_home:
+                break;
+            case R.id.nav_safe_news:
+                menuItem.setChecked(true);
+                Fragment fragment = HomePageFragment.newInstance();
+                mMainView.setTitle(menuItem.getTitle());
+                mMainView.showFragment(fragment);
+                break;
             case R.id.nav_about:
-                /**
-                 * 这里注意应该把类似的跳转放在MainActivity中，而不是Presenter中
-                 * AboutActivity.startActivity(mContext);
-                 */
                 mMainView.startAboutActivity();
                 break;
             case R.id.nav_feedback:
@@ -64,5 +72,7 @@ public class MainPresenter implements MainContract.Presenter{
             default:
                 break;
         }
+
+        mMainView.closeDrawers();
     }
 }

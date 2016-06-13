@@ -22,6 +22,11 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
     private ListPreference mPreferenceFontSize;  // 字体大小
     private ListPreference mPreferenceThreadSort;  // 阅读排序方式
 
+    public static SettingFragment newInstance() {
+        SettingFragment fragment = new SettingFragment();
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -5,6 +5,11 @@ import com.pediy.kanxue.R;
 
 
 public class SafeNewsFragment extends BaseFragment {
+    public static SafeNewsFragment newInstance() {
+        SafeNewsFragment fragment = new SafeNewsFragment();
+        return fragment;
+    }
+
     @Override
     public int getContentViewId() {
         return R.layout.fragment_safe_news;

@@ -14,9 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
-/**
- * TODO!!!这里有一个疑问就是如果Gson转化出现错误，如何处理
- */
 public class FeedbackApi {
     private FeedbackService mFeedbackService;
 
