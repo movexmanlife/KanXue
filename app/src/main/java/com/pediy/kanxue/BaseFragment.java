@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.pediy.kanxue.injector.component.AppComponent;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
@@ -36,5 +38,9 @@ public abstract class BaseFragment extends Fragment {
         initData();
         initView();
         setListener();
+    }
+
+    protected AppComponent getAppComponent() {
+        return ((App)getActivity().getApplication()).getAppComponent();
     }
 }

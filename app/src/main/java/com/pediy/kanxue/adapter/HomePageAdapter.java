@@ -30,10 +30,13 @@ public class HomePageAdapter extends RecyclerArrayAdapter<TopicBean.ForumbitsEnt
         itemViewHolder.detailName.setText(name);
     }
 
+    /**
+     * hashCode为负的，会导致显示header显示不了
+     */
     @Override
     public long getHeaderId(int position) {
-        int index = getItem(position).getCategroyName().hashCode() + 100000000;
-        return index;
+        int index = getItem(position).getCategroyName().hashCode();
+        return Math.abs(index);
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.pediy.kanxue.api.thread;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.pediy.kanxue.api.ApiConst;
 import com.pediy.kanxue.bean.LoginBean;
+import com.pediy.kanxue.bean.TopicBean;
 import com.pediy.kanxue.util.SimpleHASH;
 
 import okhttp3.OkHttpClient;
@@ -20,7 +23,8 @@ public class ThreadApi {
     private static final String BASE_URL = ApiConst.LOGIN_BASE_URL;
 
     public ThreadApi(OkHttpClient mOkHttpClient) {
-        Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+        Gson gson = new GsonBuilder().setLenient().create();
+        Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create(gson))
                         .client(mOkHttpClient)
                         .baseUrl(BASE_URL)
                         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -28,7 +32,7 @@ public class ThreadApi {
         mThreadService = retrofit.create(ThreadService.class);
     }
 
-    public Observable<LoginBean> getHomepage() {
+    public Observable<TopicBean> getHomepage() {
         return mThreadService.getHomepage(12).subscribeOn(Schedulers.io());
     }
 }

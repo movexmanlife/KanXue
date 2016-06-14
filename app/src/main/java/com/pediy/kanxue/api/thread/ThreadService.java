@@ -1,6 +1,7 @@
 package com.pediy.kanxue.api.thread;
 
 import com.pediy.kanxue.bean.LoginBean;
+import com.pediy.kanxue.bean.TopicBean;
 
 import java.util.Map;
 
@@ -13,7 +14,10 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 public interface ThreadService {
-    @FormUrlEncoded
+    /**
+     *  java.lang.IllegalArgumentException: FormUrlEncoded can only be specified on HTTP methods with request body (e.g., @POST).
+     *  @FormUrlEncoded
+     */
     @GET("index.php")
-    Observable<LoginBean> getHomepage(@Query("styleid") int styleid);
+    Observable<TopicBean> getHomepage(@Query("styleid") int styleid);
 }

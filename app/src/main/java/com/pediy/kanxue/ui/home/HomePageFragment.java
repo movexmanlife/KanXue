@@ -11,19 +11,39 @@ import com.pediy.kanxue.R;
 import com.pediy.kanxue.adapter.DividerDecoration;
 import com.pediy.kanxue.adapter.HomePageAdapter;
 import com.pediy.kanxue.adapter.RecyclerItemClickListener;
+import com.pediy.kanxue.api.thread.ThreadApi;
+import com.pediy.kanxue.bean.LoginBean;
 import com.pediy.kanxue.bean.TopicBean;
+import com.pediy.kanxue.injector.component.AppComponent;
+import com.pediy.kanxue.injector.module.ActivityModule;
+import com.pediy.kanxue.ui.main.MainActivity;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 
 public class HomePageFragment extends BaseFragment {
+    @BindView(R.id.ptr_classic_frame_layout)
+    PtrClassicFrameLayout ptrClassicFrameLayout;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
+    private Object mSubscription;
+    @Inject
+    ThreadApi mThreadApi;
+    HomePageAdapter adapter;
 
     public static HomePageFragment newInstance() {
         HomePageFragment fragment = new HomePageFragment();
@@ -37,16 +57,51 @@ public class HomePageFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
 
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                requestData();
+            }
+        });
+    }
+
+    private void requestData() {
+        mSubscription = mThreadApi.getHomepage()
+                .map(new Func1<TopicBean, List<TopicBean.ForumbitsEntity.ForumSubTitleEntity>>() {
+                    @Override
+                    public List<TopicBean.ForumbitsEntity.ForumSubTitleEntity> call(TopicBean topicBean) {
+                        if (topicBean == null || topicBean.getForumbits() == null) {
+                            return null;
+                        }
+                        List<TopicBean.ForumbitsEntity.ForumSubTitleEntity> list = TopicBean.convertToStickyData(topicBean.getForumbits());
+                        return list;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<TopicBean.ForumbitsEntity.ForumSubTitleEntity>>() {
+                    @Override
+                    public void call(List<TopicBean.ForumbitsEntity.ForumSubTitleEntity> subEntityList) {
+                        ptrClassicFrameLayout.refreshComplete();
+                        if (subEntityList != null && !subEntityList.isEmpty()) {
+                            adapter.clear();
+                            adapter.addAll(subEntityList);
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        ptrClassicFrameLayout.refreshComplete();
+                        throwable.printStackTrace();
+                    }
+                });
     }
 
     @Override
     public void initView() {
         // Set adapter populated with example dummy data
-        final HomePageAdapter adapter = new HomePageAdapter();
+        adapter = new HomePageAdapter();
 
-        List<TopicBean.ForumbitsEntity.ForumSubTitleEntity> list = getMockData();
-        adapter.addAll(list);
         recyclerView.setAdapter(adapter);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -81,111 +136,6 @@ public class HomePageFragment extends BaseFragment {
         });
     }
 
-    private List<TopicBean.ForumbitsEntity.ForumSubTitleEntity> getMockData() {
-        List<TopicBean.ForumbitsEntity.ForumSubTitleEntity> list = new ArrayList<>();
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e1= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e1.setName("初学者园地");
-        e1.setCategroyName("求助问答");
-        list.add(e1);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e2= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e2.setName("Andoid");
-        e2.setCategroyName("求助问答");
-        list.add(e2);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e3= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e3.setName("Watch");
-        e3.setCategroyName("求助问答");
-        list.add(e3);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e4= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e4.setName("ios");
-        e4.setCategroyName("求助问答");
-        list.add(e4);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e5= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e5.setName("coding");
-        e5.setCategroyName("求助问答");
-        list.add(e5);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e6= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e6.setName("github");
-        e6.setCategroyName("求助问答");
-        list.add(e6);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e11= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e11.setName("MFC");
-        e11.setCategroyName("windows");
-        list.add(e11);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e12= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e12.setName("WPS");
-        e12.setCategroyName("windows");
-        list.add(e12);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e13= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e13.setName("OFFICE");
-        e13.setCategroyName("windows");
-        list.add(e13);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e14= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e14.setName("PROJECT");
-        e14.setCategroyName("windows");
-        list.add(e14);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e15= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e15.setName("SYSTEM");
-        e15.setCategroyName("windows");
-        list.add(e15);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e16= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e16.setName("MSN");
-        e16.setCategroyName("windows");
-        list.add(e16);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e111= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e111.setName("MFC");
-        e111.setCategroyName("安全");
-        list.add(e111);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e112= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e112.setName("WPS");
-        e112.setCategroyName("安全");
-        list.add(e112);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e113= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e113.setName("OFFICE");
-        e113.setCategroyName("安全");
-        list.add(e113);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e114= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e114.setName("PROJECT");
-        e114.setCategroyName("安全");
-        list.add(e114);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e115= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e115.setName("SYSTEM");
-        e115.setCategroyName("安全");
-        list.add(e115);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e116= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e116.setName("MSN");
-        e116.setCategroyName("安全");
-        list.add(e116);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e117= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e117.setName("MSN");
-        e117.setCategroyName("安全");
-        list.add(e117);
-
-        TopicBean.ForumbitsEntity.ForumSubTitleEntity e118= new TopicBean.ForumbitsEntity.ForumSubTitleEntity();
-        e118.setName("MSN");
-        e118.setCategroyName("安全");
-        list.add(e118);
-
-        return list;
-    }
-
     @Override
     public void setListener() {
 
@@ -196,7 +146,11 @@ public class HomePageFragment extends BaseFragment {
      */
     @Override
     public void initInjector() {
-
+        DaggerHomepageComponent.builder().
+                appComponent(getAppComponent()).
+                activityModule(new ActivityModule(getActivity())).
+                build().
+                inject(this);
     }
 
 }

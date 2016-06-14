@@ -87,7 +87,7 @@ public class TopicBean {
      * @return
      */
     public static List<ForumbitsEntity.ForumSubTitleEntity> convertToStickyData(List<ForumbitsEntity> forumbitsEntityList) {
-        if (forumbitsEntityList != null || forumbitsEntityList.isEmpty()) {
+        if (forumbitsEntityList == null || forumbitsEntityList.isEmpty()) {
             return null;
         }
         List<ForumbitsEntity.ForumSubTitleEntity> subList = new ArrayList<>();
