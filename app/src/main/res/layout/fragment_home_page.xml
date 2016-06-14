@@ -5,8 +5,9 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="homepage" />
+        android:saveEnabled="false"/>
 </LinearLayout>

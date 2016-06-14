@@ -53,12 +53,12 @@ public class MainPresenter implements MainContract.Presenter{
             case R.id.nav_new_topic:
                 break;
             case R.id.nav_home:
-                break;
-            case R.id.nav_safe_news:
                 menuItem.setChecked(true);
                 Fragment fragment = HomePageFragment.newInstance();
                 mMainView.setTitle(menuItem.getTitle());
                 mMainView.showFragment(fragment);
+                break;
+            case R.id.nav_safe_news:
                 break;
             case R.id.nav_about:
                 mMainView.startAboutActivity();

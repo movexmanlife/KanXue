@@ -12,4 +12,5 @@
 
     <color name="txt_gray">#999999</color>
     <color name="txt_dark_gray">#434343</color>
+    <color name="item_header_color">#E2E7EE</color>
 </resources>

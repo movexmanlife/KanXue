@@ -1,5 +1,6 @@
 package com.pediy.kanxue.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TopicBean {
@@ -41,6 +42,11 @@ public class TopicBean {
             private int imgId;
             private String name;
 
+            /**
+             * 非服务器传过来的，需要自己手动设置
+             */
+            private String categroyName;
+
             public int getId() {
                 return id;
             }
@@ -64,6 +70,36 @@ public class TopicBean {
             public void setName(String name) {
                 this.name = name;
             }
+
+            public String getCategroyName() {
+                return categroyName;
+            }
+
+            public void setCategroyName(String categroyName) {
+                this.categroyName = categroyName;
+            }
         }
+    }
+
+    /**
+     * 将原始数据转化为StickyRecycler的数据
+     * @param forumbitsEntityList
+     * @return
+     */
+    public static List<ForumbitsEntity.ForumSubTitleEntity> convertToStickyData(List<ForumbitsEntity> forumbitsEntityList) {
+        if (forumbitsEntityList != null || forumbitsEntityList.isEmpty()) {
+            return null;
+        }
+        List<ForumbitsEntity.ForumSubTitleEntity> subList = new ArrayList<>();
+        for (ForumbitsEntity entity : forumbitsEntityList) {
+            String categoryName = entity.getForumTitle();
+
+            for (ForumbitsEntity.ForumSubTitleEntity subEntity : entity.getForumSubTitle()) {
+                subEntity.setCategroyName(categoryName);
+                subList.add(subEntity);
+            }
+        }
+
+        return subList;
     }
 }
