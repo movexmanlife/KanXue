@@ -35,8 +35,7 @@ public class HomePageAdapter extends RecyclerArrayAdapter<TopicBean.ForumbitsEnt
      */
     @Override
     public long getHeaderId(int position) {
-        int index = getItem(position).getCategroyName().hashCode();
-        return Math.abs(index);
+        return getItem(position).getCategroy();
     }
 
     @Override

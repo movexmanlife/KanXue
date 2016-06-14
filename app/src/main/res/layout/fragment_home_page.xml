@@ -9,6 +9,7 @@
 <in.srain.cube.views.ptr.PtrClassicFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ptr_classic_frame_layout"
+    android:background="@color/content_backgroud"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     cube_ptr:ptr_content="@+id/recyclerview"

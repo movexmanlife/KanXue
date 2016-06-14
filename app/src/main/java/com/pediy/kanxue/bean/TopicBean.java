@@ -38,6 +38,7 @@ public class TopicBean {
         }
 
         public static class ForumSubTitleEntity {
+            public static final int CATEGROY_BASE = 0x11;
             private int id;
             private int imgId;
             private String name;
@@ -46,6 +47,10 @@ public class TopicBean {
              * 非服务器传过来的，需要自己手动设置
              */
             private String categroyName;
+            /**
+             * 非服务器传过来的，需要自己手动设置，设置类别值
+             */
+            private int categroy;
 
             public int getId() {
                 return id;
@@ -78,6 +83,14 @@ public class TopicBean {
             public void setCategroyName(String categroyName) {
                 this.categroyName = categroyName;
             }
+
+            public int getCategroy() {
+                return categroy;
+            }
+
+            public void setCategroy(int categroy) {
+                this.categroy = categroy;
+            }
         }
     }
 
@@ -91,11 +104,14 @@ public class TopicBean {
             return null;
         }
         List<ForumbitsEntity.ForumSubTitleEntity> subList = new ArrayList<>();
-        for (ForumbitsEntity entity : forumbitsEntityList) {
+
+        for (int i = 0; i < forumbitsEntityList.size(); i++) {
+            ForumbitsEntity entity = forumbitsEntityList.get(i);
             String categoryName = entity.getForumTitle();
 
             for (ForumbitsEntity.ForumSubTitleEntity subEntity : entity.getForumSubTitle()) {
                 subEntity.setCategroyName(categoryName);
+                subEntity.setCategroy(ForumbitsEntity.ForumSubTitleEntity.CATEGROY_BASE + i);
                 subList.add(subEntity);
             }
         }
