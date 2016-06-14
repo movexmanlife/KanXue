@@ -4,17 +4,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.pediy.kanxue.R;
-import com.pediy.kanxue.bean.TopicBean;
+import com.pediy.kanxue.bean.HomepageBean;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomePageAdapter extends RecyclerArrayAdapter<TopicBean.ForumbitsEntity.ForumSubTitleEntity, RecyclerView.ViewHolder>
+public class HomePageAdapter extends RecyclerArrayAdapter<HomepageBean.ForumbitsEntity.ForumSubTitleEntity, RecyclerView.ViewHolder>
         implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,9 +29,6 @@ public class HomePageAdapter extends RecyclerArrayAdapter<TopicBean.ForumbitsEnt
         itemViewHolder.detailName.setText(name);
     }
 
-    /**
-     * hashCode为负的，会导致显示header显示不了
-     */
     @Override
     public long getHeaderId(int position) {
         return getItem(position).getCategroy();

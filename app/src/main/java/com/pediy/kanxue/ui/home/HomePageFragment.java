@@ -3,7 +3,6 @@ package com.pediy.kanxue.ui.home;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.pediy.kanxue.BaseFragment;
@@ -12,15 +11,11 @@ import com.pediy.kanxue.adapter.DividerDecoration;
 import com.pediy.kanxue.adapter.HomePageAdapter;
 import com.pediy.kanxue.adapter.RecyclerItemClickListener;
 import com.pediy.kanxue.api.thread.ThreadApi;
-import com.pediy.kanxue.bean.LoginBean;
-import com.pediy.kanxue.bean.TopicBean;
-import com.pediy.kanxue.injector.component.AppComponent;
+import com.pediy.kanxue.bean.HomepageBean;
 import com.pediy.kanxue.injector.module.ActivityModule;
-import com.pediy.kanxue.ui.main.MainActivity;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersTouchListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,7 +24,7 @@ import butterknife.BindView;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
-import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -40,7 +35,7 @@ public class HomePageFragment extends BaseFragment {
     PtrClassicFrameLayout ptrClassicFrameLayout;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
-    private Object mSubscription;
+    private Subscription mSubscription;
     @Inject
     ThreadApi mThreadApi;
     HomePageAdapter adapter;
@@ -68,20 +63,20 @@ public class HomePageFragment extends BaseFragment {
 
     private void requestData() {
         mSubscription = mThreadApi.getHomepage()
-                .map(new Func1<TopicBean, List<TopicBean.ForumbitsEntity.ForumSubTitleEntity>>() {
+                .map(new Func1<HomepageBean, List<HomepageBean.ForumbitsEntity.ForumSubTitleEntity>>() {
                     @Override
-                    public List<TopicBean.ForumbitsEntity.ForumSubTitleEntity> call(TopicBean topicBean) {
+                    public List<HomepageBean.ForumbitsEntity.ForumSubTitleEntity> call(HomepageBean topicBean) {
                         if (topicBean == null || topicBean.getForumbits() == null) {
                             return null;
                         }
-                        List<TopicBean.ForumbitsEntity.ForumSubTitleEntity> list = TopicBean.convertToStickyData(topicBean.getForumbits());
+                        List<HomepageBean.ForumbitsEntity.ForumSubTitleEntity> list = HomepageBean.convertToStickyData(topicBean.getForumbits());
                         return list;
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<TopicBean.ForumbitsEntity.ForumSubTitleEntity>>() {
+                .subscribe(new Action1<List<HomepageBean.ForumbitsEntity.ForumSubTitleEntity>>() {
                     @Override
-                    public void call(List<TopicBean.ForumbitsEntity.ForumSubTitleEntity> subEntityList) {
+                    public void call(List<HomepageBean.ForumbitsEntity.ForumSubTitleEntity> subEntityList) {
                         ptrClassicFrameLayout.refreshComplete();
                         if (subEntityList != null && !subEntityList.isEmpty()) {
                             adapter.clear();

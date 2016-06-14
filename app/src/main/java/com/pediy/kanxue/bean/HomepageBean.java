@@ -3,7 +3,7 @@ package com.pediy.kanxue.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopicBean {
+public class HomepageBean {
     private List<ForumbitsEntity> forumbits;
 
     public List<ForumbitsEntity> getForumbits() {
