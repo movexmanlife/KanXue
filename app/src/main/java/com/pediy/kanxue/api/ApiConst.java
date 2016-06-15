@@ -41,4 +41,13 @@ public class ApiConst {
      * 倒序
      */
     public static final String DESC = "desc";
+
+    /**
+     * 获取看雪用户头像的url
+     * @param userId 用户id
+     * @return
+     */
+    public static String getUserAvatarUrl(int userId) {
+        return DOMAIN + PATH + "image.php?u=" + userId;
+    }
 }

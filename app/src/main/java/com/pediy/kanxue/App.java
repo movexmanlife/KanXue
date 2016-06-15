@@ -2,9 +2,15 @@ package com.pediy.kanxue;
 
 import android.app.Application;
 
+import com.google.gson.reflect.TypeToken;
 import com.pediy.kanxue.injector.component.AppComponent;
 import com.pediy.kanxue.injector.component.DaggerAppComponent;
 import com.pediy.kanxue.injector.module.AppModule;
+import com.pediy.kanxue.util.GsonUtils;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App extends Application {
 
@@ -16,6 +22,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         initComponent();
+
         mApp = this;
     }
 

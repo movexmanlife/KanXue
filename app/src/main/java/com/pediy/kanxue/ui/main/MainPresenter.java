@@ -10,6 +10,7 @@ import com.pediy.kanxue.api.login.LoginApi;
 import com.pediy.kanxue.bean.LoginBean;
 import com.pediy.kanxue.ui.about.AboutActivity;
 import com.pediy.kanxue.ui.home.HomePageFragment;
+import com.pediy.kanxue.ui.topic.NewTopicFragment;
 
 import javax.inject.Inject;
 
@@ -51,14 +52,11 @@ public class MainPresenter implements MainContract.Presenter{
     public void onNavigationClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_new_topic:
-                break;
             case R.id.nav_home:
-                menuItem.setChecked(true);
-                Fragment fragment = HomePageFragment.newInstance();
-                mMainView.setTitle(menuItem.getTitle());
-                mMainView.showFragment(fragment);
-                break;
             case R.id.nav_safe_news:
+                menuItem.setChecked(true);
+                mMainView.setTitle(menuItem.getTitle());
+                mMainView.onTabSelect(menuItem);
                 break;
             case R.id.nav_about:
                 mMainView.startAboutActivity();

@@ -59,6 +59,7 @@ public class HomePageFragment extends BaseFragment {
                 requestData();
             }
         });
+        ptrClassicFrameLayout.autoRefresh();
     }
 
     private void requestData() {

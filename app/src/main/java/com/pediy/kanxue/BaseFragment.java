@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.pediy.kanxue.injector.HasComponent;
 import com.pediy.kanxue.injector.component.AppComponent;
 
 import butterknife.ButterKnife;
@@ -42,5 +43,14 @@ public abstract class BaseFragment extends Fragment {
 
     protected AppComponent getAppComponent() {
         return ((App)getActivity().getApplication()).getAppComponent();
+    }
+
+    @SuppressWarnings("unchecked") protected <C> C getComponent(Class<C> clazz) {
+        if (getActivity() instanceof HasComponent<?>) {
+            C component = ((HasComponent<C>) getActivity()).getComponent();
+            return clazz.cast(component);
+        }
+
+        return null;
     }
 }

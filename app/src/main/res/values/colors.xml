@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffffff</color>
+    <color name="gray">#808080</color>
+    <color name="forum_display_item_title_color">#22229C</color>
 
     <color name="title_header_color">#40567E</color>
     <color name="title_header_color_dark">#25334B</color>
@@ -13,4 +15,11 @@
     <color name="txt_gray">#999999</color>
     <color name="txt_dark_gray">#434343</color>
     <color name="item_header_color">#E2E7EE</color>
+
+    <color name="global_bg">#eeeff3</color>
+    <color name="line_color">#dadada</color>
+    <color name="refresh_color1">#ff0f9d58</color>
+    <color name="refresh_color2">#ffdb4437</color>
+    <color name="refresh_color3">#ff4285f4</color>
+    <color name="refresh_color4">#fff4b400</color>
 </resources>
